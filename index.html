@@ -58,10 +58,24 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 40px rgba(0, 0, 0, 0.4);
         }
         .project-card:hover {
-            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-2px);
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 50px rgba(0, 0, 0, 0.5);
         }
+        .card-orange {
+            background: rgba(251, 146, 60, 0.07);
+            border-color: rgba(251, 146, 60, 0.2);
+        }
+        .card-orange:hover { background: rgba(251, 146, 60, 0.12); }
+        .card-blue {
+            background: rgba(56, 189, 248, 0.07);
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+        .card-blue:hover { background: rgba(56, 189, 248, 0.12); }
+        .card-green {
+            background: rgba(34, 197, 94, 0.07);
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+        .card-green:hover { background: rgba(34, 197, 94, 0.12); }
 
         .project-header {
             display: flex;
@@ -116,28 +130,28 @@
     <div class="bg-grain"></div>
     <div class="container">
         <div class="projects">
-            <a href="https://samiprehn.github.io/winner_dinner/" class="project-card fade-in" target="_blank" rel="noopener noreferrer">
+            <a href="https://samiprehn.github.io/winner_dinner/" class="project-card card-orange fade-in" target="_blank" rel="noopener noreferrer">
                 <div class="project-header">
                     <img src="https://samiprehn.github.io/winner_dinner/windin_logo.png" class="project-logo" alt="">
                     <div class="project-name">Winner Dinner</div>
                 </div>
                 <div class="project-desc">A group restaurant picker — vote together on where to eat</div>
             </a>
-            <a href="https://samiprehn.github.io/sd_beaches/" class="project-card fade-in" style="animation-delay: 0.05s;" target="_blank" rel="noopener noreferrer">
+            <a href="https://samiprehn.github.io/sd_beaches/" class="project-card card-blue fade-in" style="animation-delay: 0.05s;" target="_blank" rel="noopener noreferrer">
                 <div class="project-header">
                     <span class="project-icon">🏖️</span>
                     <div class="project-name">San Diego Beaches</div>
                 </div>
                 <div class="project-desc">Weather and ocean conditions</div>
             </a>
-            <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card fade-in" style="animation-delay: 0.1s;" target="_blank" rel="noopener noreferrer">
+            <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card card-blue fade-in" style="animation-delay: 0.1s;" target="_blank" rel="noopener noreferrer">
                 <div class="project-header">
                     <span class="project-icon">🐕</span>
                     <div class="project-name">San Diego Dog Beaches</div>
                 </div>
                 <div class="project-desc">Weather and ocean conditions</div>
             </a>
-            <a href="https://samiprehn.github.io/ready-set-vote/" class="project-card fade-in" style="animation-delay: 0.15s;" target="_blank" rel="noopener noreferrer">
+            <a href="https://samiprehn.github.io/ready-set-vote/" class="project-card card-green fade-in" style="animation-delay: 0.15s;" target="_blank" rel="noopener noreferrer">
                 <div class="project-header">
                     <span class="project-icon">🗳️</span>
                     <div class="project-name">Ready Set Vote</div>
