@@ -18,6 +18,15 @@ Weather and ocean conditions for San Diego beaches with live webcams.
 ### 🐕 [San Diego Dog Beaches](https://samiprehn.github.io/sd_dog_beaches/)
 Weather and ocean conditions for San Diego's dog-friendly beaches with live webcams.
 
+### 🧺 [San Diego Farmers Markets](https://samiprehn.github.io/sd_farmers_markets/)
+Which farmers markets are open today across San Diego County.
+
+### 🛒 [Cart Karma](https://samiprehn.github.io/cart-karma/)
+Find ethical alternatives to Amazon — independent stores, co-ops, B Corps, and secondhand marketplaces.
+
+### 📊 [Data Analyzer](https://samiprehn.github.io/data-analyzer/)
+Instant exploratory data analysis in your browser — drop in a CSV and get column profiling, hypothesis tests, correlation heatmaps, and ML recommendations.
+
 ## Built With
 - HTML, CSS, JavaScript
 - Tailwind CSS
