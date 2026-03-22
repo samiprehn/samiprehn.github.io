@@ -37,12 +37,40 @@
             z-index: 10;
         }
 
-        .projects {
+        .layout {
             width: 100%;
             max-width: 28rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .friends-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 0.25rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 700px) {
+            .layout {
+                max-width: 56rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+            .friends-label {
+                margin-top: 1rem;
+            }
         }
 
         .project-card {
@@ -60,7 +88,7 @@
             transform: translateY(-2px);
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 50px rgba(0, 0, 0, 0.5);
         }
-.card-blue {
+        .card-blue {
             background: linear-gradient(135deg, #60a5fa, #67e8f9);
             border-color: transparent;
             color: white;
@@ -127,73 +155,75 @@
 <body>
     <div class="bg-grain"></div>
     <div class="container">
-        <div class="projects">
-            <a href="https://samiprehn.github.io/winner_dinner/" class="project-card fade-in" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <img src="https://samiprehn.github.io/winner_dinner/windin_logo.png" class="project-logo" alt="">
-                    <div class="project-name" style="background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Winner Dinner</div>
-                </div>
-                <div class="project-desc">Vote on where to eat together</div>
-            </a>
-            <a href="https://samiprehn.github.io/sd_beaches/" class="project-card fade-in" style="animation-delay: 0.05s; background: linear-gradient(135deg, #b87d48, #e8c050); border-color: transparent;" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🏖️</span>
-                    <div class="project-name">San Diego Beaches</div>
-                </div>
-                <div class="project-desc">Weather and ocean conditions</div>
-            </a>
-            <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card card-blue fade-in" style="animation-delay: 0.1s;" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🐕</span>
-                    <div class="project-name">San Diego Dog Beaches</div>
-                </div>
-                <div class="project-desc">Weather and ocean conditions</div>
-            </a>
-            <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #15803d, #16a34a);" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🧺</span>
-                    <div class="project-name">San Diego Farmers Markets</div>
-                </div>
-                <div class="project-desc" style="color: rgba(255,255,255,0.7);">Which farmers markets are open today</div>
-            </a>
-            <a href="https://samiprehn.github.io/cart-karma/" class="project-card fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #14532d, #064e3b);" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🛒</span>
-                    <div class="project-name">Cart Karma</div>
-                </div>
-                <div class="project-desc" style="color: rgba(255,255,255,0.7);">Find ethical alternatives to Amazon</div>
-            </a>
-            <a href="https://samiprehn.github.io/data-analyzer/" class="project-card fade-in" style="animation-delay: 0.3s; background: linear-gradient(135deg, #1e1b4b, #312e81);" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">📊</span>
-                    <div class="project-name">Data Analyzer</div>
-                </div>
-                <div class="project-desc" style="color: rgba(255,255,255,0.7);">Instant exploratory data analysis in your browser</div>
-            </a>
-            <a href="https://samiprehn.github.io/ready-set-vote/" class="project-card card-green fade-in" style="animation-delay: 0.35s;" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🗳️</span>
-                    <div class="project-name"><span style="color:#dc2626">Ready</span> <span style="color:#ca8a04">Set</span> <span style="color:#16a34a">Vote</span></div>
-                </div>
-                <div class="project-desc">Research your ballot. Make informed choices.</div>
-            </a>
-        </div>
-        <div class="projects" style="margin-top: 3rem;">
-            <div style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 0.25rem;">Friends</div>
-            <a href="https://mprehn.github.io/roll_call" class="project-card fade-in" style="background: linear-gradient(135deg, #ec4899, #a855f7); border-color: transparent;" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">🛼</span>
-                    <div class="project-name">Roll Call</div>
-                </div>
-                <div class="project-desc">Roller skating spots in San Diego</div>
-            </a>
-            <a href="https://nwslfan.github.io" class="project-card fade-in" style="background: linear-gradient(135deg, #090d1a, #130820); border-color: rgba(233,30,140,0.3);" target="_blank" rel="noopener noreferrer">
-                <div class="project-header">
-                    <span class="project-icon">⚽</span>
-                    <div class="project-name">NWSL Fantasy League</div>
-                </div>
-                <div class="project-desc">2026 NWSL pick'em league</div>
-            </a>
+        <div class="layout">
+            <div class="col">
+                <a href="https://samiprehn.github.io/winner_dinner/" class="project-card fade-in" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <img src="https://samiprehn.github.io/winner_dinner/windin_logo.png" class="project-logo" alt="">
+                        <div class="project-name" style="background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Winner Dinner</div>
+                    </div>
+                    <div class="project-desc">Vote on where to eat together</div>
+                </a>
+                <a href="https://samiprehn.github.io/sd_beaches/" class="project-card fade-in" style="animation-delay: 0.05s; background: linear-gradient(135deg, #b87d48, #e8c050); border-color: transparent;" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🏖️</span>
+                        <div class="project-name">San Diego Beaches</div>
+                    </div>
+                    <div class="project-desc" style="color: rgba(0,0,0,0.5);">Weather and ocean conditions</div>
+                </a>
+                <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card card-blue fade-in" style="animation-delay: 0.1s;" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🐕</span>
+                        <div class="project-name">San Diego Dog Beaches</div>
+                    </div>
+                    <div class="project-desc">Weather and ocean conditions</div>
+                </a>
+                <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #15803d, #16a34a);" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🧺</span>
+                        <div class="project-name">San Diego Farmers Markets</div>
+                    </div>
+                    <div class="project-desc" style="color: rgba(255,255,255,0.7);">Which farmers markets are open today</div>
+                </a>
+                <a href="https://samiprehn.github.io/cart-karma/" class="project-card fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #14532d, #064e3b);" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🛒</span>
+                        <div class="project-name">Cart Karma</div>
+                    </div>
+                    <div class="project-desc" style="color: rgba(255,255,255,0.7);">Find ethical alternatives to Amazon</div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://samiprehn.github.io/data-analyzer/" class="project-card fade-in" style="animation-delay: 0.3s; background: linear-gradient(135deg, #1e1b4b, #312e81);" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">📊</span>
+                        <div class="project-name">Data Analyzer</div>
+                    </div>
+                    <div class="project-desc" style="color: rgba(255,255,255,0.7);">Instant exploratory data analysis in your browser</div>
+                </a>
+                <a href="https://samiprehn.github.io/ready-set-vote/" class="project-card card-green fade-in" style="animation-delay: 0.35s;" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🗳️</span>
+                        <div class="project-name"><span style="color:#dc2626">Ready</span> <span style="color:#ca8a04">Set</span> <span style="color:#16a34a">Vote</span></div>
+                    </div>
+                    <div class="project-desc">Research your ballot. Make informed choices.</div>
+                </a>
+                <div class="friends-label">Friends</div>
+                <a href="https://mprehn.github.io/roll_call" class="project-card fade-in" style="background: linear-gradient(135deg, #ec4899, #a855f7); border-color: transparent;" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">🛼</span>
+                        <div class="project-name">Roll Call</div>
+                    </div>
+                    <div class="project-desc">Roller skating spots in San Diego</div>
+                </a>
+                <a href="https://nwslfan.github.io" class="project-card fade-in" style="background: linear-gradient(135deg, #090d1a, #130820); border-color: rgba(233,30,140,0.3);" target="_blank" rel="noopener noreferrer">
+                    <div class="project-header">
+                        <span class="project-icon">⚽</span>
+                        <div class="project-name">NWSL Fantasy League</div>
+                    </div>
+                    <div class="project-desc">2026 NWSL pick'em league</div>
+                </a>
+            </div>
         </div>
         <a href="https://buymeacoffee.com/samiprehn" target="_blank" rel="noopener noreferrer" class="bmc-link fade-in" style="animation-delay: 0.25s;">
             Keep these pages running
