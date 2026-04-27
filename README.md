@@ -40,6 +40,13 @@ Ethical alternatives to Amazon — independent stores, co-ops, B Corps, and seco
 ### 📊 [Data Analyzer](https://samiprehn.github.io/data-analyzer/)
 Drop in a CSV and get column profiling, hypothesis tests, correlation heatmaps, and ML recommendations — all in your browser.
 
+## Built for friends
+
+### ⚽ [NWSL Fantasy League](https://nwslfan.github.io/)
+A 2026 NWSL pick'em league tracker built and maintained for a friend's league. 27 weekly picks rounds backed by a Google Apps Script form, with results auto-derived from the schedule sheet.
+
+The portfolio also links to a friend's own site, [Roll Call](https://mprehn.github.io/roll_call/) — roller skating spots in San Diego.
+
 ## Built with
 
 - Vanilla HTML, CSS, JavaScript — single-file apps, no build step
