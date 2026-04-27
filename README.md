@@ -45,7 +45,8 @@ Drop in a CSV and get column profiling, hypothesis tests, correlation heatmaps, 
 ### ⚽ [NWSL Fantasy League](https://nwslfan.github.io/)
 A 2026 NWSL pick'em league tracker built and maintained for a friend's league. 27 weekly picks rounds backed by a Google Apps Script form, with results auto-derived from the schedule sheet.
 
-The portfolio also links to a friend's own site, [Roll Call](https://mprehn.github.io/roll_call/) — roller skating spots in San Diego.
+### 🛼 [Roll Call](https://mprehn.github.io/roll_call/)
+Roller skating spots in San Diego — built for a friend, lives under their GitHub account.
 
 ## Built with
 
