@@ -9,7 +9,7 @@ Visit: [samiprehn.github.io](https://samiprehn.github.io)
 ### 🌅 [San Diego Sunset](https://samiprehn.github.io/sd-sunset/)
 Tonight's best San Diego sunset viewpoint, ranked by NWS cloud cover plus layered TAF data and a live GOES-18 satellite. Optional ntfy push when any spot grades A+.
 
-### 🌌 [Skywatch SD](https://samiprehn.github.io/skywatch/)
+### 🌌 [Stargaze SD](https://samiprehn.github.io/stargaze/)
 When and where to see stars near San Diego, this week. Combines NWS forecast with sun/moon ephemeris and a Bortle multiplier per site.
 
 ### 🏖️ [San Diego Beaches](https://samiprehn.github.io/sd_beaches/)
