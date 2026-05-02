@@ -245,8 +245,8 @@
                         <circle cx="118" cy="86" r="0.5" fill="#fff" opacity="0.6"/>
                         <circle cx="156" cy="82" r="0.6" fill="#fff" opacity="0.7"/>
                     </svg>
+                    <svg id="stargaze-moon-icon" viewBox="-30 -30 60 60" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);width:2.5rem;height:2.5rem;filter:drop-shadow(0 0 6px rgba(243,236,214,0.45));pointer-events:none;"></svg>
                     <div class="project-header" style="position:relative;">
-                        <span class="project-icon">🌌</span>
                         <div class="project-name" style="color: white;">Stargaze SD</div>
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.75); position:relative;">When and where to see stars in SD, this week.</div>
@@ -272,5 +272,57 @@
             Keep these pages running
         </a>
     </div>
+    <script>
+    // Stargaze SD card icon: render today's actual moon phase as a small SVG
+    // (compact suncalc-style port — same logic as samiprehn.github.io/stargaze)
+    (function () {
+        const PI = Math.PI, RAD = PI / 180, OBLIQUITY = RAD * 23.4397;
+        const toDays = (d) => d.getTime() / 86400000 - 0.5 + 2440588 - 2451545;
+        function sunCoords(d) {
+            const M = RAD * (357.5291 + 0.98560028 * d);
+            const C = RAD * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2*M) + 0.0003 * Math.sin(3*M));
+            const L = M + C + RAD * 102.9372 + PI;
+            return { dec: Math.asin(Math.sin(OBLIQUITY) * Math.sin(L)), ra: Math.atan2(Math.sin(L) * Math.cos(OBLIQUITY), Math.cos(L)) };
+        }
+        function moonCoords(d) {
+            const L = RAD * (218.316 + 13.176396 * d);
+            const M = RAD * (134.963 + 13.064993 * d);
+            const F = RAD * (93.272  + 13.229350 * d);
+            const lng = L + RAD * 6.289 * Math.sin(M);
+            const lat = RAD * 5.128 * Math.sin(F);
+            return {
+                ra:  Math.atan2(Math.sin(lng) * Math.cos(OBLIQUITY) - Math.tan(lat) * Math.sin(OBLIQUITY), Math.cos(lng)),
+                dec: Math.asin(Math.sin(lat) * Math.cos(OBLIQUITY) + Math.cos(lat) * Math.sin(OBLIQUITY) * Math.sin(lng)),
+                dist: 385001 - 20905 * Math.cos(M),
+            };
+        }
+        function illumination(date) {
+            const d = toDays(date), s = sunCoords(d), m = moonCoords(d), sd = 149598000;
+            const phi = Math.acos(Math.sin(s.dec)*Math.sin(m.dec) + Math.cos(s.dec)*Math.cos(m.dec)*Math.cos(s.ra - m.ra));
+            const inc = Math.atan2(sd * Math.sin(phi), m.dist - sd * Math.cos(phi));
+            return (1 + Math.cos(inc)) / 2;
+        }
+        const svg = document.getElementById('stargaze-moon-icon');
+        if (!svg) return;
+        const now = new Date();
+        const illum = illumination(now);
+        const d = toDays(now), s = sunCoords(d), m = moonCoords(d);
+        let raDiff = ((m.ra - s.ra) * 180 / PI) % 360;
+        if (raDiff < 0) raDiff += 360;
+        const waxing = raDiff < 180;
+        const r = 28;
+        let inner = `<circle cx="0" cy="0" r="${r}" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>`;
+        if (illum > 0.99) {
+            inner += `<circle cx="0" cy="0" r="${r}" fill="#f3ecd6"/>`;
+        } else if (illum > 0.01) {
+            const xR = Math.max(r * Math.abs(1 - 2 * illum), 0.01);
+            const outerSweep = waxing ? 1 : 0;
+            const innerSweep = illum < 0.5 ? 0 : 1;
+            const path = `M 0 ${-r} A ${r} ${r} 0 0 ${outerSweep} 0 ${r} A ${xR} ${r} 0 0 ${innerSweep} 0 ${-r} Z`;
+            inner += `<path d="${path}" fill="#f3ecd6"/>`;
+        }
+        svg.innerHTML = inner;
+    })();
+    </script>
 </body>
 </html>
