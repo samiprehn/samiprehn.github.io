@@ -186,12 +186,13 @@
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.75); position:relative;">Tonight's best viewpoint, ranked</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #1d9e50, #22c55e);" target="_blank" rel="noopener noreferrer">
-                    <div class="project-header">
+                <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #1d9e50, #22c55e); overflow: hidden;" target="_blank" rel="noopener noreferrer">
+                    <div id="farmers-produce-bg" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+                    <div class="project-header" style="position:relative;">
                         <span class="project-icon">🧺</span>
                         <div class="project-name">SD Farmers Markets</div>
                     </div>
-                    <div class="project-desc" style="color: rgba(255,255,255,0.7);">Which farmers markets are open today</div>
+                    <div class="project-desc" style="color: rgba(255,255,255,0.7); position:relative;">Which farmers markets are open today</div>
                 </a>
                 <a href="https://samiprehn.github.io/cart-karma/" class="project-card fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #14532d, #064e3b);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
@@ -457,6 +458,86 @@
         } catch (e) {
             // fail silently — keep the emoji as the fallback
         }
+    })();
+
+    // Farmers Markets card: scatter one of each in-season produce emoji
+    // randomly across the card (with collision avoidance).
+    (function () {
+        const IN_SEASON = {
+            1:  '🍊🍋🥑🥕🥬🥦',
+            2:  '🍊🍋🥑🥕🥬🥦',
+            3:  '🍓🍊🍋🥑🥕🥬🥦🫛🧅',
+            4:  '🍓🥑🍋🍒🥬🥒🫛🧄🧅',
+            5:  '🍓🍒🥑🍋🥕🥬🥒🍆🍅🫛',
+            6:  '🍑🍒🍓🫐🥑🥕🥒🍆🍅🫑🌽',
+            7:  '🍑🫐🥑🥕🥒🍆🍅🫑🌶️🌽🍈🍉',
+            8:  '🍑🍎🥑🥕🥒🍆🍅🫑🌶️🌽🍈🍉',
+            9:  '🍎🍐🍇🥑🥒🍆🍅🫑🍠',
+            10: '🍎🍐🍇🥑🥒🍆🍅🥬🥦🍠',
+            11: '🍎🍐🥑🥦🥕🥬🥒🍅🍠',
+            12: '🍊🍋🥑🥦🥕🥬🍅',
+        };
+        const container = document.getElementById('farmers-produce-bg');
+        if (!container) return;
+        const month = new Date().getMonth() + 1;
+        const emojis = [...(IN_SEASON[month] || '')];
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 32;
+        const ctx = canvas.getContext('2d');
+        function supported(emoji) {
+            ctx.clearRect(0, 0, 32, 32);
+            ctx.font = '24px sans-serif';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#000';
+            ctx.fillText(emoji, 0, 0);
+            const data = ctx.getImageData(0, 0, 32, 32).data;
+            for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] === 0) continue;
+                if (data[i] > 5 || data[i + 1] > 5 || data[i + 2] > 5) return true;
+            }
+            return false;
+        }
+        const visible = emojis.filter(supported);
+        if (!visible.length) return;
+
+        // Wait for layout so the card has dimensions
+        requestAnimationFrame(() => {
+            const rect = container.getBoundingClientRect();
+            const w = rect.width, h = rect.height;
+            // Scatter the emojis in the right half-ish (left has the title text)
+            const placed = [];
+            const buffer = 8;
+            for (const emoji of visible) {
+                const sizeRem = 1 + Math.random() * 0.4; // 1.0-1.4 rem
+                const r = sizeRem * 16 * 0.55;
+                let x, y, ok = false;
+                for (let attempt = 0; attempt < 30; attempt++) {
+                    // Sample mostly the right half so it doesn't crowd the title
+                    x = w * (0.6 + Math.random() * 0.35) + (Math.random() - 0.5) * 20;
+                    y = h * (0.10 + Math.random() * 0.80);
+                    let overlap = false;
+                    for (const p of placed) {
+                        const dx = x - p.x, dy = y - p.y;
+                        const minDist = r + p.r + buffer;
+                        if (dx * dx + dy * dy < minDist * minDist) { overlap = true; break; }
+                    }
+                    if (!overlap) { ok = true; break; }
+                }
+                if (!ok) continue;
+                placed.push({ x, y, r });
+                const span = document.createElement('span');
+                span.textContent = emoji;
+                span.style.position = 'absolute';
+                span.style.left = (x - r) + 'px';
+                span.style.top = (y - r) + 'px';
+                span.style.fontSize = sizeRem + 'rem';
+                span.style.lineHeight = '1';
+                span.style.transform = `rotate(${(Math.random() * 50 - 25).toFixed(0)}deg)`;
+                span.style.opacity = (0.85 + Math.random() * 0.15).toFixed(2);
+                span.style.filter = 'drop-shadow(0 1px 2px rgba(0,0,0,0.25))';
+                container.appendChild(span);
+            }
+        });
     })();
     </script>
 </body>
