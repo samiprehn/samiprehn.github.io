@@ -178,12 +178,13 @@
                     </div>
                     <div class="project-desc">Weather and ocean conditions</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd-sunset/" class="project-card fade-in" style="animation-delay: 0.125s; background: linear-gradient(135deg, #1e0e20, #4a1823, #c85a5a); border-color: transparent;" target="_blank" rel="noopener noreferrer">
-                    <div class="project-header">
+                <a href="https://samiprehn.github.io/sd-sunset/" class="project-card fade-in" style="animation-delay: 0.125s; background: linear-gradient(135deg, #1e0e20, #4a1823, #c85a5a); border-color: transparent; overflow: hidden;" target="_blank" rel="noopener noreferrer">
+                    <div id="sd-sunset-grade" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-size:3rem;font-weight:800;letter-spacing:-0.04em;line-height:1;font-feature-settings:'tnum';opacity:0;transition:opacity 0.4s;pointer-events:none;text-shadow:0 0 12px rgba(0,0,0,0.45);"></div>
+                    <div class="project-header" style="position:relative;">
                         <span class="project-icon">🌅</span>
                         <div class="project-name" style="background: linear-gradient(90deg, #fcdca6, #f58a4e, #e85a99); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SD Sunset</div>
                     </div>
-                    <div class="project-desc" style="color: rgba(255,255,255,0.75);">Tonight's best viewpoint, ranked</div>
+                    <div class="project-desc" style="color: rgba(255,255,255,0.75); position:relative;">Tonight's best viewpoint, ranked</div>
                 </a>
                 <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #1d9e50, #22c55e);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
@@ -322,6 +323,140 @@
             inner += `<path d="${path}" fill="#f3ecd6"/>`;
         }
         svg.innerHTML = inner;
+    })();
+
+    // SD Sunset card preview: live grade letter for tonight's top spot
+    // (mirrors classifyTAF + verdictFor + gradeFor from the live site)
+    (async function () {
+        const el = document.getElementById('sd-sunset-grade');
+        if (!el) return;
+        const SPOTS = [
+            { grid: 'SGX/53,14', taf: 'KSAN' }, // Sunset Cliffs
+            { grid: 'SGX/55,22', taf: 'KNKX' }, // Torrey Pines Gliderport
+            { grid: 'SGX/54,20', taf: 'KSAN' }, // Mt Soledad
+            { grid: 'SGX/56,13', taf: 'KNZY' }, // Coronado
+            { grid: 'SGX/54,16', taf: 'KSAN' }, // OB
+            { grid: 'SGX/54,21', taf: 'KSAN' }, // La Jolla Shores
+            { grid: 'SGX/56,16', taf: 'KSAN' }, // Presidio Park
+            { grid: 'SGX/63,15', taf: 'KNKX' }, // Mt Helix
+            { grid: 'SGX/54,31', taf: 'KCRQ' }, // Ponto Beach
+            { grid: 'SGX/55,26', taf: 'KCRQ' }, // Del Mar
+        ];
+        const TAF_WORKER = 'https://sd-sunset-taf.sami-prehn.workers.dev';
+        const FOG_PENALTY = 35;
+
+        function parseDur(iso) {
+            const m = iso.match(/P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?/);
+            if (!m) return 0;
+            return ((+(m[1]||0)*24 + +(m[2]||0))*60 + +(m[3]||0)) * 60000;
+        }
+        function valueAt(values, target) {
+            for (const e of values) {
+                const [s, dur] = e.validTime.split('/');
+                const start = new Date(s).getTime();
+                if (target >= start && target < start + parseDur(dur)) return e.value;
+            }
+            return null;
+        }
+        function tafPeriodAt(rec, sec) {
+            if (!rec || !Array.isArray(rec.fcsts)) return null;
+            return rec.fcsts.find(p => p.timeFrom <= sec && sec < p.timeTo) || null;
+        }
+        function classifyTAF(period) {
+            if (!period || !Array.isArray(period.clouds)) return { score: 0, verdict: null };
+            const clouds = period.clouds.filter(c => c && c.base !== null);
+            const veryLow = clouds.filter(c => c.base < 3000);
+            const low = clouds.filter(c => c.base < 5000);
+            const high = clouds.filter(c => c.base >= 20000);
+            const vlH = veryLow.find(c => c.cover === 'BKN' || c.cover === 'OVC');
+            const lH = low.find(c => c.cover === 'BKN' || c.cover === 'OVC');
+            const lM = low.find(c => c.cover === 'SCT');
+            const lL = low.find(c => c.cover === 'FEW');
+            const hH = high.find(c => c.cover === 'BKN' || c.cover === 'OVC');
+            let score = 0, verdict = null;
+            if (vlH) { score += 60; verdict = 'Marine layer'; }
+            else if (lH) { score += 40; verdict = `Low clouds (${lH.base}ft)`; }
+            else if (lM) { score += 20; verdict = `Patchy low clouds (${lM.base}ft)`; }
+            else if (lL) { score += 10; }
+            if (hH && !vlH && !lH) { score -= 15; if (!verdict) verdict = 'Cirrus — best color'; }
+            return { score, verdict };
+        }
+        function verdictFor(c) {
+            if (c < 20) return 'Clear & golden';
+            if (c < 50) return 'Great for color';
+            if (c < 75) return 'Partly cloudy';
+            if (c < 90) return 'Hazy';
+            return 'Socked in';
+        }
+        function gradeFor(label) {
+            if (label === 'Cirrus — best color') return 'A+';
+            if (label === 'Great for color') return 'A';
+            if (label === 'Partly cloudy') return 'B';
+            if (label === 'Clear & golden') return 'C';
+            if (label === 'Hazy') return 'D';
+            if (label.startsWith('Low clouds')) return 'D';
+            if (label.startsWith('Patchy low')) return 'C-';
+            if (label.startsWith('Marine layer')) return 'F';
+            if (label === 'Socked in') return 'D';
+            return 'D';
+        }
+        function blocking(w) {
+            return Array.isArray(w) ? (w.find(x => x && x.weather) || null) : null;
+        }
+        const RANK = { 'A+': 0, A: 1, B: 2, C: 3, 'C-': 4, D: 5, F: 6 };
+        const COLOR = { 'A+': '#e85a99', A: '#f58a4e', B: '#f97316', C: '#f5c860', 'C-': '#9aa3b2', D: '#9aa3b2', F: '#7a808a' };
+
+        try {
+            // Sunset for the date that's "next" — if today's already passed, use tomorrow.
+            const now = new Date();
+            const today = now.toISOString().slice(0, 10);
+            const todaySun = await fetch(`https://api.sunrise-sunset.org/json?lat=32.72&lng=-117.22&date=${today}&formatted=0`).then(r => r.json());
+            let sunsetMs = new Date(todaySun.results.sunset).getTime();
+            if (sunsetMs < now.getTime()) {
+                const t = new Date(now.getTime() + 86400000).toISOString().slice(0, 10);
+                const tomSun = await fetch(`https://api.sunrise-sunset.org/json?lat=32.72&lng=-117.22&date=${t}&formatted=0`).then(r => r.json());
+                sunsetMs = new Date(tomSun.results.sunset).getTime();
+            }
+
+            const uniqGrids = [...new Set(SPOTS.map(s => s.grid))];
+            const uniqTafs = [...new Set(SPOTS.map(s => s.taf))];
+            const [grids, tafsResp] = await Promise.all([
+                Promise.all(uniqGrids.map(g =>
+                    fetch(`https://api.weather.gov/gridpoints/${g}`).then(r => r.json())
+                        .then(d => [g, { sky: d.properties.skyCover.values, weather: d.properties.weather.values }])
+                )),
+                fetch(`${TAF_WORKER}/?ids=${uniqTafs.join(',')}`).then(r => r.json()).catch(() => []),
+            ]);
+            const gridMap = Object.fromEntries(grids);
+            const tafMap = {};
+            for (const t of (tafsResp || [])) if (t.icaoId && !tafMap[t.icaoId]) tafMap[t.icaoId] = t;
+
+            let best = null;
+            const sec = Math.floor(sunsetMs / 1000);
+            for (const s of SPOTS) {
+                const g = gridMap[s.grid];
+                if (!g) continue;
+                const cloud = valueAt(g.sky, sunsetMs);
+                if (cloud === null) continue;
+                const blocker = blocking(valueAt(g.weather, sunsetMs));
+                const taf = classifyTAF(tafPeriodAt(tafMap[s.taf], sec));
+                let label = taf.verdict
+                    || (blocker ? blocker.weather.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()) : verdictFor(cloud));
+                const grade = gradeFor(label);
+                const score = Math.abs(cloud - 40) + taf.score + (blocker && !taf.verdict ? FOG_PENALTY : 0);
+                const rank = RANK[grade] ?? 99;
+                if (!best || rank < best.rank || (rank === best.rank && score < best.score)) {
+                    best = { grade, rank, score };
+                }
+            }
+            if (best) {
+                el.textContent = best.grade;
+                el.style.color = COLOR[best.grade] || '#fff';
+                el.style.opacity = '1';
+            }
+        } catch (e) {
+            // fail silently — keep the emoji as the fallback
+        }
     })();
     </script>
 </body>
