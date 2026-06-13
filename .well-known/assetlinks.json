@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "io.github.samiprehn.winnerdinner",
       "sha256_cert_fingerprints": [
-        "76:C4:08:7A:94:55:22:C4:DB:4B:5A:85:12:43:3A:15:58:82:08:40:ED:8E:40:0E:F7:06:17:AA:D5:C6:4A:FC"
+        "76:C4:08:7A:94:55:22:C4:DB:4B:5A:85:12:43:3A:15:58:82:08:40:ED:8E:40:0E:F7:06:17:AA:D5:C6:4A:FC",
+        "AF:EA:AA:48:90:37:08:CB:BA:16:D5:65:1D:0F:6C:0C:97:4E:8E:38:F7:A0:36:5B:3B:D9:AB:95:A3:5A:F6:EB"
       ]
     }
   }
