@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.samiprehn.winnerdinner",
+      "sha256_cert_fingerprints": [
+        "76:C4:08:7A:94:55:22:C4:DB:4B:5A:85:12:43:3A:15:58:82:08:40:ED:8E:40:0E:F7:06:17:AA:D5:C6:4A:FC"
+      ]
+    }
+  }
+]
