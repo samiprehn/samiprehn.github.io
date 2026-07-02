@@ -410,11 +410,12 @@
         try {
             // Sunset for the date that's "next" — if today's already passed, use tomorrow.
             const now = new Date();
-            const today = now.toISOString().slice(0, 10);
+            const laDate = (d) => d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+            const today = laDate(now);
             const todaySun = await fetch(`https://api.sunrise-sunset.org/json?lat=32.72&lng=-117.22&date=${today}&formatted=0`).then(r => r.json());
             let sunsetMs = new Date(todaySun.results.sunset).getTime();
             if (sunsetMs < now.getTime()) {
-                const t = new Date(now.getTime() + 86400000).toISOString().slice(0, 10);
+                const t = laDate(new Date(now.getTime() + 86400000));
                 const tomSun = await fetch(`https://api.sunrise-sunset.org/json?lat=32.72&lng=-117.22&date=${t}&formatted=0`).then(r => r.json());
                 sunsetMs = new Date(tomSun.results.sunset).getTime();
             }
