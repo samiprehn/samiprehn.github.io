@@ -76,7 +76,7 @@
         .project-card {
             display: block;
             background: rgba(255, 255, 255, 0.05);
-            background-repeat: no-repeat;
+            background-clip: padding-box;
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 1rem;
             padding: 1.5rem;
@@ -90,14 +90,14 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 50px rgba(0, 0, 0, 0.5);
         }
         .card-blue {
-            background: linear-gradient(135deg, #60a5fa, #67e8f9);
+            background: linear-gradient(135deg, #60a5fa, #67e8f9); background-clip: padding-box;
             border-color: transparent;
             color: white;
         }
         .card-blue:hover { filter: brightness(1.05); }
         .card-blue .project-desc { color: rgba(255, 255, 255, 0.7); }
         .card-green {
-            background: linear-gradient(135deg, #bbf7d0, #93edca);
+            background: linear-gradient(135deg, #bbf7d0, #93edca); background-clip: padding-box;
             border-color: transparent;
             color: #0f172a;
         }
@@ -161,33 +161,33 @@
                 <a href="https://samiprehn.github.io/winner_dinner/" class="project-card fade-in" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <img src="https://samiprehn.github.io/winner_dinner/windin_logo.png" class="project-logo" alt="">
-                        <div class="project-name" style="background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Winner Dinner</div>
+                        <div class="project-name" style="background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Winner Dinner</div>
                     </div>
                     <div class="project-desc">Vote on where to eat together</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd_beaches/" class="project-card fade-in" style="animation-delay: 0.05s; background: linear-gradient(90deg, #e2bb7e 0%, #f0d9a8 35%, #fff5dc 60%, #ffffff 64%, #c2e6f6 72%, #5fb4e6 88%, #1d7fc4 100%); border-color: transparent; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/sd_beaches/" class="project-card fade-in" style="animation-delay: 0.05s; background: linear-gradient(90deg, #e2bb7e 0%, #f0d9a8 35%, #fff5dc 60%, #ffffff 64%, #c2e6f6 72%, #5fb4e6 88%, #1d7fc4 100%); background-clip: padding-box; border-color: transparent;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon" style="filter: drop-shadow(0 0 3px rgba(0,0,0,0.55));">🏖️</span>
                         <div class="project-name" style="color: #5a3a16; text-shadow: 0 1px 2px rgba(255,255,255,0.4);">San Diego Beaches</div>
                     </div>
                     <div class="project-desc" style="color: rgba(74,46,16,0.7); text-shadow: 0 1px 2px rgba(255,255,255,0.4);">Weather and ocean conditions</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card fade-in" style="animation-delay: 0.1s; background: linear-gradient(90deg, #e2bb7e 0%, #f0d9a8 35%, #fff5dc 60%, #ffffff 64%, #c2e6f6 72%, #5fb4e6 88%, #1d7fc4 100%); border-color: transparent;" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/sd_dog_beaches/" class="project-card fade-in" style="animation-delay: 0.1s; background: linear-gradient(90deg, #e2bb7e 0%, #f0d9a8 35%, #fff5dc 60%, #ffffff 64%, #c2e6f6 72%, #5fb4e6 88%, #1d7fc4 100%); background-clip: padding-box; border-color: transparent;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon" style="filter: drop-shadow(0 0 3px rgba(0,0,0,0.55));">🐕</span>
                         <div class="project-name" style="color: #5a3a16; text-shadow: 0 1px 2px rgba(255,255,255,0.4);">SD Dog Beaches</div>
                     </div>
                     <div class="project-desc" style="color: rgba(74,46,16,0.7); text-shadow: 0 1px 2px rgba(255,255,255,0.4);">Weather and ocean conditions</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd-sunset/" class="project-card fade-in" style="animation-delay: 0.125s; background: linear-gradient(135deg, #1e0e20, #4a1823, #c85a5a); border-color: transparent; overflow: hidden; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/sd-sunset/" class="project-card fade-in" style="animation-delay: 0.125s; background: linear-gradient(135deg, #1e0e20, #4a1823, #c85a5a); background-clip: padding-box; border-color: transparent; overflow: hidden;" target="_blank" rel="noopener noreferrer">
                     <div id="sd-sunset-grade" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-size:3rem;font-weight:800;letter-spacing:-0.04em;line-height:1;font-feature-settings:'tnum';opacity:0;transition:opacity 0.4s;pointer-events:none;text-shadow:0 0 12px rgba(0,0,0,0.45);"></div>
                     <div class="project-header" style="position:relative;">
                         <span class="project-icon">🌅</span>
-                        <div class="project-name" style="background: linear-gradient(90deg, #fcdca6, #f58a4e, #e85a99); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SD Sunset</div>
+                        <div class="project-name" style="background: linear-gradient(90deg, #fcdca6, #f58a4e, #e85a99); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SD Sunset</div>
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.75); position:relative;">Tonight's best viewpoint, ranked</div>
                 </a>
-                <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #1d9e50, #22c55e); overflow: hidden;" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/sd_farmers_markets/" class="project-card fade-in" style="animation-delay: 0.15s; background: linear-gradient(135deg, #1d9e50, #22c55e); background-clip: padding-box; overflow: hidden;" target="_blank" rel="noopener noreferrer">
                     <div id="farmers-produce-bg" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
                     <div class="project-header" style="position:relative;">
                         <span class="project-icon">🧺</span>
@@ -195,16 +195,16 @@
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.7); position:relative;">Which farmers markets are open today</div>
                 </a>
-                <a href="https://samiprehn.github.io/cart-karma/" class="project-card fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #14532d, #064e3b);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/cart-karma/" class="project-card fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #14532d, #064e3b); background-clip: padding-box;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">🛒</span>
-                        <div class="project-name" style="background: linear-gradient(90deg, #4ade80, #a3e635); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Cart Karma</div>
+                        <div class="project-name" style="background: linear-gradient(90deg, #4ade80, #a3e635); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Cart Karma</div>
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.7);">Find ethical alternatives to Amazon</div>
                 </a>
             </div>
             <div class="col">
-                <a href="https://samiprehn.github.io/data-analyzer/" class="project-card fade-in" style="animation-delay: 0.3s; background: linear-gradient(135deg, #1e1b4b, #312e81);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/data-analyzer/" class="project-card fade-in" style="animation-delay: 0.3s; background: linear-gradient(135deg, #1e1b4b, #312e81); background-clip: padding-box;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">📊</span>
                         <div class="project-name">Data Analyzer</div>
@@ -218,14 +218,14 @@
                     </div>
                     <div class="project-desc">Research your ballot. Make informed choices.</div>
                 </a>
-                <a href="https://samiprehn.github.io/my_reps/" class="project-card fade-in" style="animation-delay: 0.4s; background: linear-gradient(135deg, #1f2937, #4b5563); border-color: transparent;" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/my_reps/" class="project-card fade-in" style="animation-delay: 0.4s; background: linear-gradient(135deg, #1f2937, #4b5563); background-clip: padding-box; border-color: transparent;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">🏛️</span>
                         <div class="project-name" style="color: white;">My Reps</div>
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.75);">See how your senators and House rep have been voting</div>
                 </a>
-                <a href="https://samiprehn.github.io/stargaze/" class="project-card fade-in" style="animation-delay: 0.45s; background: radial-gradient(ellipse at top right, #312e81, #0b1026 70%); border-color: transparent; overflow: hidden;" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/stargaze/" class="project-card fade-in" style="animation-delay: 0.45s; background: radial-gradient(ellipse at top right, #312e81, #0b1026 70%); background-clip: padding-box; border-color: transparent; overflow: hidden;" target="_blank" rel="noopener noreferrer">
                     <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                         <circle cx="18" cy="14" r="0.9" fill="#fff"/>
                         <circle cx="42" cy="8"  r="0.6" fill="#fff" opacity="0.7"/>
@@ -254,36 +254,36 @@
                     </div>
                     <div class="project-desc" style="color: rgba(255,255,255,0.75); position:relative;">When and where to see stars this week</div>
                 </a>
-                <a href="https://samiprehn.github.io/challenge_archive/" class="project-card fade-in" style="animation-delay: 0.5s; background: linear-gradient(135deg, #12160f, #2a2013); border-color: rgba(255,140,43,0.35);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/challenge_archive/" class="project-card fade-in" style="animation-delay: 0.5s; background: linear-gradient(135deg, #12160f, #2a2013); background-clip: padding-box; border-color: rgba(255,140,43,0.35);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">🔥</span>
-                        <div class="project-name" style="background: linear-gradient(90deg, #ffd390, #ff8c2b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Archive</div>
+                        <div class="project-name" style="background: linear-gradient(90deg, #ffd390, #ff8c2b); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Archive</div>
                     </div>
                     <div class="project-desc" style="color: rgba(233,223,198,0.7);">Every Survivor and The Challenge challenge</div>
                 </a>
-                <a href="https://samiprehn.github.io/challenge_day/" class="project-card fade-in" style="animation-delay: 0.55s; background: linear-gradient(135deg, #1a0f0d, #33150f); border-color: rgba(224,92,74,0.35);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/challenge_day/" class="project-card fade-in" style="animation-delay: 0.55s; background: linear-gradient(135deg, #1a0f0d, #33150f); background-clip: padding-box; border-color: rgba(224,92,74,0.35);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">⚔️</span>
-                        <div class="project-name" style="background: linear-gradient(90deg, #ff8c2b, #e05c4a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Day</div>
+                        <div class="project-name" style="background: linear-gradient(90deg, #ff8c2b, #e05c4a); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Day</div>
                     </div>
                     <div class="project-desc" style="color: rgba(233,223,198,0.7);">Run your own Challenge — live scoreboard and voting</div>
                 </a>
-                <a href="https://samiprehn.github.io/challenge_day/production.html" class="project-card fade-in" style="animation-delay: 0.575s; background: linear-gradient(135deg, #1a0f0d, #33150f); border-color: rgba(224,92,74,0.35);" target="_blank" rel="noopener noreferrer">
+                <a href="https://samiprehn.github.io/challenge_day/production.html" class="project-card fade-in" style="animation-delay: 0.575s; background: linear-gradient(135deg, #1a0f0d, #33150f); background-clip: padding-box; border-color: rgba(224,92,74,0.35);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">🎬</span>
-                        <div class="project-name" style="background: linear-gradient(90deg, #ff8c2b, #e05c4a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Day Prod</div>
+                        <div class="project-name" style="background: linear-gradient(90deg, #ff8c2b, #e05c4a); background-clip: padding-box; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Challenge Day Prod</div>
                     </div>
                     <div class="project-desc" style="color: rgba(233,223,198,0.7);">Production control room — token-gated, crew only</div>
                 </a>
                 <div class="friends-label">Friends</div>
-                <a href="https://mprehn.github.io/roll_call" class="project-card fade-in" style="background: linear-gradient(135deg, #ec4899, #a855f7); border-color: transparent;" target="_blank" rel="noopener noreferrer">
+                <a href="https://mprehn.github.io/roll_call" class="project-card fade-in" style="background: linear-gradient(135deg, #ec4899, #a855f7); background-clip: padding-box; border-color: transparent;" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">🛼</span>
                         <div class="project-name">Roll Call</div>
                     </div>
                     <div class="project-desc">Roller skating spots in SD</div>
                 </a>
-                <a href="https://nwslfan.github.io" class="project-card fade-in" style="background: linear-gradient(135deg, #090d1a, #130820); border-color: rgba(233,30,140,0.3);" target="_blank" rel="noopener noreferrer">
+                <a href="https://nwslfan.github.io" class="project-card fade-in" style="background: linear-gradient(135deg, #090d1a, #130820); background-clip: padding-box; border-color: rgba(233,30,140,0.3);" target="_blank" rel="noopener noreferrer">
                     <div class="project-header">
                         <span class="project-icon">⚽</span>
                         <div class="project-name">NWSL Fantasy League</div>
